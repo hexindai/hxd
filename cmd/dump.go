@@ -42,6 +42,7 @@ hxd dump --host=[主机ip] --port=[端口号] --username=[用户名] --password=
 			for len(password) == 0 {
 				fmt.Print("请键入数据库密码:")
 				bytes, err := terminal.ReadPassword(int(syscall.Stdin))
+				fmt.Print("\n")
 				if err != nil {
 					continue
 				}

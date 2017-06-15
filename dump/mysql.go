@@ -14,28 +14,28 @@ import (
 func GenerateExcel(host string, port string, username string, password string, schema string, table string) {
 	db, err := sql.Open("mysql", username+":"+password+"@tcp("+host+":"+port+")/information_schema")
 	if err != nil {
-		panic(err.Error()) // Just for example purpose. You should use proper error handling instead of panic
+		log.Fatalln(err.Error()) // Just for example purpose. You should use proper error handling instead of panic
 	}
 	defer db.Close()
 
 	// Open doesn't open a connection. Validate DSN data:
 	err = db.Ping()
 	if err != nil {
-		panic(err.Error()) // proper error handling instead of panic in your app
+		log.Fatalln(err.Error()) // proper error handling instead of panic in your app
 	}
 	var rows *sql.Rows
 
 	if len(table) != 0 {
 		stmtOut, err := db.Prepare("select TABLE_SCHEMA as '库名', TABLE_NAME as '表名', COLUMN_NAME as '字段名字', DATA_TYPE as '字段类型', COLUMN_COMMENT as '字段注释' from COLUMNS where TABLE_SCHEMA = ? and TABLE_NAME = ?")
 		if err != nil {
-			panic(err.Error()) // proper error handling instead of panic in your app
+			log.Fatalln(err.Error()) // proper error handling instead of panic in your app
 		}
 		defer stmtOut.Close()
 		rows, err = stmtOut.Query(schema, table)
 	} else {
 		stmtOut, err := db.Prepare("select TABLE_SCHEMA as '库名', TABLE_NAME as '表名', COLUMN_NAME as '字段名字', DATA_TYPE as '字段类型', COLUMN_COMMENT as '字段注释' from COLUMNS where TABLE_SCHEMA = ?")
 		if err != nil {
-			panic(err.Error()) // proper error handling instead of panic in your app
+			log.Fatalln(err.Error()) // proper error handling instead of panic in your app
 		}
 		defer stmtOut.Close()
 		rows, err = stmtOut.Query(schema)
@@ -58,7 +58,7 @@ func GenerateExcel(host string, port string, username string, password string, s
 		var columnComment string
 		err = rows.Scan(&tableSchema, &tableName, &columnName, &dataType, &columnComment)
 		if err != nil {
-			panic(err.Error())
+			log.Fatalln(err.Error())
 		}
 		var sheet *xlsx.Sheet
 		if s, ok := mappers[tableName]; ok {
@@ -66,7 +66,7 @@ func GenerateExcel(host string, port string, username string, password string, s
 		} else {
 			sheet, err = file.AddSheet(tableName)
 			if err != nil {
-				panic(err.Error())
+				log.Fatalln(err.Error())
 			}
 			sRow := sheet.AddRow()
 			cellOne := sRow.AddCell()
@@ -95,10 +95,10 @@ func GenerateExcel(host string, port string, username string, password string, s
 	}
 	err = rows.Err()
 	if err != nil {
-		panic(err.Error())
+		log.Fatalln(err.Error())
 	}
 	err = file.Save(schema + ".xlsx")
 	if err != nil {
-		panic(err.Error())
+		log.Fatalln(err.Error())
 	}
 }
