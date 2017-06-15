@@ -25,7 +25,7 @@ var cfgFile string
 
 // RootCmd represents the base command when called without any subcommands
 var RootCmd = &cobra.Command{
-	Use:   "dd",
+	Use:   "hxd",
 	Short: "和信贷数据库相关命令行",
 	Long: `
 	

@@ -40,7 +40,7 @@ var dumpCmd = &cobra.Command{
 	Use:   "dump",
 	Short: "导出数据库的数据字典并生成excel文件",
 	Long: `该命令为和信贷数据字典导出命令。例子如下：
-dd dump --host=[主机ip] --port=[端口号] --username=[用户名] --password=[密码] --schema=[库名] --table=[表名]`,
+hxd dump --host=[主机ip] --port=[端口号] --username=[用户名] --password=[密码] --schema=[库名] --table=[表名]`,
 	Run: func(cmd *cobra.Command, args []string) {
 		if len(schema) > 0 {
 			scanner := bufio.NewScanner(os.Stdin)
@@ -63,7 +63,7 @@ dd dump --host=[主机ip] --port=[端口号] --username=[用户名] --password=[
 			}
 			database.GenerateExcel(host, port, username, password, schema, table)
 		} else {
-			fmt.Println("dd dump --host=[主机ip] --port=[端口号] --username=[用户名] --password=[密码] --schema=[库名] --table=[表名]")
+			fmt.Println("hxd dump --host=[主机ip] --port=[端口号] --username=[用户名] --password=[密码] --schema=[库名] --table=[表名]")
 		}
 	},
 }
