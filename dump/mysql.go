@@ -1,4 +1,7 @@
-package database
+// Copyright © 2017 Runrioter Wung <runrioter@qq.com>
+// Licensed under the MIT license.
+
+package dump
 
 import (
 	"database/sql"
