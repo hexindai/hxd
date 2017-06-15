@@ -61,7 +61,7 @@ var tailCmd = &cobra.Command{
 			if err != nil {
 				log.Fatalln(err)
 			}
-			fmt.Printf("%v\n", totalBytes)
+
 			var startByte int64 = 0
 			var endByte int64 = totalBytes
 			if totalBytes-LastContentBytes >= 0 {
