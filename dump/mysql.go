@@ -5,6 +5,7 @@ package dump
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
 
 	"github.com/tealeg/xlsx"
@@ -12,30 +13,30 @@ import (
 
 // GenerateExcel generate excel
 func GenerateExcel(host string, port string, username string, password string, schema string, table string) {
-	db, err := sql.Open("mysql", username+":"+password+"@tcp("+host+":"+port+")/information_schema")
+	addr := fmt.Sprintf("%s:%s@tcp(%s:%s)/information_schema", username, password, host, port)
+	db, err := sql.Open("mysql", addr)
 	if err != nil {
-		log.Fatalln(err.Error()) // Just for example purpose. You should use proper error handling instead of panic
+		log.Fatalln(err)
 	}
 	defer db.Close()
 
-	// Open doesn't open a connection. Validate DSN data:
 	err = db.Ping()
 	if err != nil {
-		log.Fatalln(err.Error()) // proper error handling instead of panic in your app
+		log.Fatalln(err)
 	}
 	var rows *sql.Rows
 
 	if len(table) != 0 {
 		stmtOut, err := db.Prepare("select TABLE_SCHEMA as '库名', TABLE_NAME as '表名', COLUMN_NAME as '字段名字', DATA_TYPE as '字段类型', COLUMN_COMMENT as '字段注释' from COLUMNS where TABLE_SCHEMA = ? and TABLE_NAME = ?")
 		if err != nil {
-			log.Fatalln(err.Error()) // proper error handling instead of panic in your app
+			log.Fatalln(err)
 		}
 		defer stmtOut.Close()
 		rows, err = stmtOut.Query(schema, table)
 	} else {
 		stmtOut, err := db.Prepare("select TABLE_SCHEMA as '库名', TABLE_NAME as '表名', COLUMN_NAME as '字段名字', DATA_TYPE as '字段类型', COLUMN_COMMENT as '字段注释' from COLUMNS where TABLE_SCHEMA = ?")
 		if err != nil {
-			log.Fatalln(err.Error()) // proper error handling instead of panic in your app
+			log.Fatalln(err) // proper error handling instead of panic in your app
 		}
 		defer stmtOut.Close()
 		rows, err = stmtOut.Query(schema)
@@ -56,9 +57,10 @@ func GenerateExcel(host string, port string, username string, password string, s
 		var columnName string
 		var dataType string
 		var columnComment string
+
 		err = rows.Scan(&tableSchema, &tableName, &columnName, &dataType, &columnComment)
 		if err != nil {
-			log.Fatalln(err.Error())
+			log.Fatalln(err)
 		}
 		var sheet *xlsx.Sheet
 		if s, ok := mappers[tableName]; ok {
@@ -66,7 +68,7 @@ func GenerateExcel(host string, port string, username string, password string, s
 		} else {
 			sheet, err = file.AddSheet(tableName)
 			if err != nil {
-				log.Fatalln(err.Error())
+				log.Fatalln(err)
 			}
 			sRow := sheet.AddRow()
 			cellOne := sRow.AddCell()
@@ -95,10 +97,10 @@ func GenerateExcel(host string, port string, username string, password string, s
 	}
 	err = rows.Err()
 	if err != nil {
-		log.Fatalln(err.Error())
+		log.Fatalln(err)
 	}
 	err = file.Save(schema + ".xlsx")
 	if err != nil {
-		log.Fatalln(err.Error())
+		log.Fatalln(err)
 	}
 }

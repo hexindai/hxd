@@ -1,0 +1,14 @@
+github.com/go-sql-driver/mysql v1.4.0 h1:7LxgVwFb2hIQtMm87NdgAVfXjnt4OePseqT1tKx+opk=
+github.com/go-sql-driver/mysql v1.4.0/go.mod h1:zAC/RDZ24gD3HViQzih4MyKcchzm+sOG5ZlKdlhCg5w=
+github.com/hexindai/hxd v0.0.0-20170615101255-7084b71eabec h1:RLMe7nk11i0aDg052DKL8ej9VGhj0IeoQe//fOkqm2A=
+github.com/hexindai/hxd v0.0.0-20170615101255-7084b71eabec/go.mod h1:tvxOZyQR3FSN/usy+7rfFyt0gRAG5tdXOU3q/o5Akvw=
+github.com/spf13/cobra v0.0.3 h1:ZlrZ4XsMRm04Fr5pSFxBgfND2EBVa1nLpiy1stUsX/8=
+github.com/spf13/cobra v0.0.3/go.mod h1:1l0Ry5zgKvJasoi3XT1TypsSe7PqH0Sj9dhYf7v3XqQ=
+github.com/spf13/pflag v1.0.2 h1:Fy0orTDgHdbnzHcsOgfCN4LtHf0ec3wwtiwJqwvf3Gc=
+github.com/spf13/pflag v1.0.2/go.mod h1:DYY7MBk1bdzusC3SYhjObp+wFpr4gzcvqqNjLnInEg4=
+github.com/tealeg/xlsx v1.0.3 h1:BXsDIQYBPq2HgbwUxrsVXIrnO0BDxmsdUfHSfvwfBuQ=
+github.com/tealeg/xlsx v1.0.3/go.mod h1:uxu5UY2ovkuRPWKQ8Q7JG0JbSivrISjdPzZQKeo74mA=
+golang.org/x/crypto v0.0.0-20180910181607-0e37d006457b h1:2b9XGzhjiYsYPnKXoEfL7klWZQIt8IfyRCz62gCqqlQ=
+golang.org/x/crypto v0.0.0-20180910181607-0e37d006457b/go.mod h1:6SG95UA2DQfeDnfUPMdvaQW0Q7yPrPDi9nlGo2tz2b4=
+golang.org/x/sys v0.0.0-20180920110915-d641721ec2de h1:soC2mvPVpAV+Ld2qtpNn1eq25WTn76uIGNV23bofu6Q=
+golang.org/x/sys v0.0.0-20180920110915-d641721ec2de/go.mod h1:STP8DvDyc/dI5b8T5hshtkjS+E42TnysNCUPdjciGhY=
