@@ -62,7 +62,6 @@ func init() {
 	dumpCmd.Flags().StringVarP(&username, "username", "u", "", "数据库用户名")
 	dumpCmd.Flags().StringVarP(&password, "password", "p", "", "数据库密码")
 	dumpCmd.MarkFlagRequired("schema")
-	dumpCmd.MarkFlagRequired("table")
 	dumpCmd.MarkFlagRequired("username")
 	dumpCmd.MarkFlagRequired("password")
 	dumpCmd.Flags().StringVar(&host, "host", "127.0.0.1", "主机名")
